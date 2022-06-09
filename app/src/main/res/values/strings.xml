@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">NMedia</string>
     <string name="nmedia">NMedia!</string>
+    <string name="value_1000_1099" translatable="false">%1$dK</string>
+    <string name="value_1100_9999" translatable="false">%1$d.%2$dK</string>
+    <string name="value_10000_10999" translatable="false">%1$dK</string>
+    <string name="value_11000_99999" translatable="false">%1$d.%2$dK</string>
+    <string name="value_more_1000000" translatable="false">%1$d.%2$dM</string>
 </resources>
