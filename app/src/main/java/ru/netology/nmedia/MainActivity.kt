@@ -2,9 +2,14 @@ package ru.netology.nmedia
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
+import ru.netology.nmedia.data.Post
 import ru.netology.nmedia.databinding.ActivityMainBinding
+import ru.netology.nmedia.viewModel.PostViewModel
 
 class MainActivity : AppCompatActivity() {
+
+    private val viewModel by viewModels<PostViewModel>()
 
     private lateinit var binding: ActivityMainBinding
 
@@ -13,35 +18,23 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val postFirst = createPost()
+        viewModel.data.observe(this) { postFromData ->
+            binding.postBind(postFromData)
+        }
 
-        postBind(postFirst)
+        binding.buttonLike.setOnClickListener {
+            if (!viewModel.getIsLikePost()) {
+                viewModel.onLikeClickedTrue()
+            } else {
+                viewModel.onLikeClickedFalse()
+            }
+        }
 
-        binding.buttonLike.setOnClickListener { likeClick(postFirst) }
-
-        binding.buttonShare.setOnClickListener { shareClick(postFirst) }
+        binding.buttonShare.setOnClickListener { viewModel.onShareClicked() }
     }
 
-    private fun createPost(): Post {
-        return Post(
-            R.drawable.ic_launcher_foreground,
-            "Нетология. Университет интернет-профессий",
-            "21 мая в 18:36",
-            "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов " +
-                    "по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике " +
-                    "и управлению. Мы растем сами и помагаем расти студентам: от новичков до " +
-                    "уверенных профессионалов. Но самое важное остается с нами: мы верим, что в " +
-                    "каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать " +
-                    "быстрее. Наша миссия - помочь встать на путь роста и начать цепочку перемен - " +
-                    "http://netolo.gy/fyb",
-            999,
-            990,
-            5849921
-        )
-    }
 
-    private fun postBind(post: Post) {
-        binding.apply {
+    private fun ActivityMainBinding.postBind(post: Post) {
             postAuthor.text = post.author
             postIcon.setImageResource(post.icon)
             postDate.text = post.date
@@ -49,30 +42,9 @@ class MainActivity : AppCompatActivity() {
             valueLike.text = rounding(post.amountLike)
             valueShare.text = rounding(post.amountShare)
             valueSee.text = rounding(post.amountView)
-        }
-
+            buttonLike.setImageResource(getLikeIconRes(post.isLike))
     }
 
-    private fun likeClick(post: Post) {
-        binding.apply {
-            if (!post.isLike) {
-                buttonLike.setImageResource(R.drawable.ic_like_true)
-                post.isLike = !post.isLike
-                post.amountLike++
-                valueLike.text = rounding(post.amountLike)
-            } else {
-                buttonLike.setImageResource(R.drawable.ic_like)
-                post.isLike = !post.isLike
-                post.amountLike--
-                valueLike.text = rounding(post.amountLike)
-            }
-        }
-    }
-
-    private fun shareClick(post: Post) {
-        post.amountShare++
-        binding.valueShare.text = rounding(post.amountShare)
-    }
 
     private fun rounding(value: Int): String {
         return when (value) {
@@ -87,5 +59,9 @@ class MainActivity : AppCompatActivity() {
             )
             else -> getString(R.string.value_more_1000000, value / 100000, value % 100000 / 10000)
         }
+    }
+
+    private fun getLikeIconRes(isLike: Boolean): Int {
+        return if (isLike) R.drawable.ic_like_true else R.drawable.ic_like
     }
 }
