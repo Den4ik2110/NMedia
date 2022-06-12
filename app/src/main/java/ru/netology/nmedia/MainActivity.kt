@@ -22,13 +22,7 @@ class MainActivity : AppCompatActivity() {
             binding.postBind(postFromData)
         }
 
-        binding.buttonLike.setOnClickListener {
-            if (!viewModel.getIsLikePost()) {
-                viewModel.onLikeClickedTrue()
-            } else {
-                viewModel.onLikeClickedFalse()
-            }
-        }
+        binding.buttonLike.setOnClickListener { viewModel.onLikeClicked() }
 
         binding.buttonShare.setOnClickListener { viewModel.onShareClicked() }
     }
@@ -44,7 +38,6 @@ class MainActivity : AppCompatActivity() {
             valueSee.text = rounding(post.amountView)
             buttonLike.setImageResource(getLikeIconRes(post.isLike))
     }
-
 
     private fun rounding(value: Int): String {
         return when (value) {

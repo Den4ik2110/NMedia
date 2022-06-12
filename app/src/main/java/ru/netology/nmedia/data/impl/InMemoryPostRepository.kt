@@ -26,30 +26,22 @@ class InMemoryPostRepository : PostRepository {
     )
 
     override fun likeClick() {
+        val likePost: Post
         val currentPost = checkNotNull(data.value) {
             "Data value should not be null"
         }
 
-
-        val likePost = currentPost.copy(
-            isLike = !currentPost.isLike,
-            amountLike = currentPost.amountLike + 1,
-        )
-
-
-        data.value = likePost
-    }
-
-    override fun likeClickNo() {
-        val currentPost = checkNotNull(data.value) {
-            "Data value should not be null"
+        likePost = if (!currentPost.isLike) {
+            currentPost.copy(
+                isLike = !currentPost.isLike,
+                amountLike = currentPost.amountLike + 1,
+            )
+        } else {
+            currentPost.copy(
+                isLike = !currentPost.isLike,
+                amountLike = currentPost.amountLike - 1,
+            )
         }
-
-        val likePost = currentPost.copy(
-            isLike = !currentPost.isLike,
-            amountLike = currentPost.amountLike - 1,
-        )
-
         data.value = likePost
     }
 
@@ -63,12 +55,5 @@ class InMemoryPostRepository : PostRepository {
         )
 
         data.value = sharePost
-    }
-
-    override fun getPostIsLike(): Boolean {
-        val currentPost = checkNotNull(data.value) {
-            "Data value should not be null"
-        }
-        return currentPost.isLike
     }
 }

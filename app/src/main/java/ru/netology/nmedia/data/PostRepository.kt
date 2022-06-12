@@ -8,9 +8,5 @@ interface PostRepository {
 
     fun likeClick()
 
-    fun likeClickNo()
-
     fun shareClick()
-
-    fun getPostIsLike(): Boolean
 }
