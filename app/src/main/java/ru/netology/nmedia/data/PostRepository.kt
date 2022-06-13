@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 
 interface PostRepository {
 
-    val data: LiveData<Post>
+    val data: LiveData<List<Post>>
 
-    fun likeClick()
+    fun likeClick(postId: Int)
 
-    fun shareClick()
+    fun shareClick(postId: Int)
 }

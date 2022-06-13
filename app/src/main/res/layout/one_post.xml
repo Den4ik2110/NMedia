@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/postIcon"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:constraint_referenced_tags="ite"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_launcher_foreground" />
+
+    <TextView
+        android:id="@+id/postAuthor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:paddingBottom="2dp"
+        android:singleLine="true"
+        android:text="Нетология. Университет интернет-профессий"
+        app:layout_constraintBottom_toBottomOf="@+id/postIcon"
+        app:layout_constraintEnd_toStartOf="@+id/buttonMenu"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/postIcon"
+        app:layout_constraintTop_toTopOf="@+id/postIcon"
+        app:layout_constraintVertical_bias="0.35000002" />
+
+    <TextView
+        android:id="@+id/postDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="2dp"
+        android:text="21 мая в 18:36"
+        app:layout_constraintStart_toStartOf="@+id/postAuthor"
+        app:layout_constraintTop_toBottomOf="@+id/postAuthor" />
+
+    <ImageButton
+        android:id="@+id/buttonMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#00FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_three_dots" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="buttonMenu, postDate, postAuthor, postIcon"
+        tools:layout_editor_absoluteY="108dp">
+
+    </androidx.constraintlayout.widget.Barrier>
+
+    <TextView
+        android:id="@+id/postFullText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:autoLink="web"
+        android:linksClickable="true"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="8dp"
+        android:text="Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растем сами и помагаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остается с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия - помочь встать на путь роста и начать цепочку перемен - http://netolo.gy/fyb"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/barrier3" />
+
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="postFullText"
+        tools:layout_editor_absoluteY="108dp">
+
+    </androidx.constraintlayout.widget.Barrier>
+
+    <ImageButton
+        android:id="@+id/buttonLike"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:backgroundTint="#00FFFFFF"
+        app:layout_constraintTop_toBottomOf="@+id/postFullText"
+        app:srcCompat="@drawable/ic_like"
+        tools:ignore="TouchTargetSizeCheck"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/valueLike"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="10"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonLike"
+        app:layout_constraintStart_toEndOf="@+id/buttonLike"
+        app:layout_constraintTop_toTopOf="@+id/buttonLike" />
+
+    <ImageButton
+        android:id="@+id/buttonShare"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonLike"
+        app:layout_constraintStart_toEndOf="@+id/valueLike"
+        app:layout_constraintTop_toTopOf="@+id/buttonLike"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_baseline_share_24" />
+
+    <TextView
+        android:id="@+id/valueShare"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="5"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonShare"
+        app:layout_constraintStart_toEndOf="@+id/buttonShare"
+        app:layout_constraintTop_toTopOf="@+id/buttonShare"
+        app:layout_constraintVertical_bias="0.583" />
+
+    <TextView
+        android:id="@+id/valueSee"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:paddingEnd="18dp"
+        android:text="5"
+        app:layout_constraintBottom_toBottomOf="@+id/valueShare"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/valueShare" />
+
+    <ImageButton
+        android:id="@+id/buttomValueView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/valueSee"
+        app:layout_constraintEnd_toStartOf="@+id/valueSee"
+        app:layout_constraintTop_toTopOf="@+id/valueSee"
+        app:srcCompat="@drawable/ic_baseline_visibility_24" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
