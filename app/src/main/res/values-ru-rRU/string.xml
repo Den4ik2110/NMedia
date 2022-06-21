@@ -2,4 +2,8 @@
 <resources>
     <string name="app_name">Нмедиа</string>
     <string name="nmedia">НМедиа!</string>
+    <string name="remove">Удалить</string>
+    <string name="post_text">Текст поста</string>
+    <string name="edit_post">Редактировать</string>
+    <string name="edit_post_message">Редактируемый пост</string>
 </resources>

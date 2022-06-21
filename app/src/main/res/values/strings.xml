@@ -6,4 +6,8 @@
     <string name="value_10000_10999" translatable="false">%1$dK</string>
     <string name="value_11000_99999" translatable="false">%1$d.%2$dK</string>
     <string name="value_more_1000000" translatable="false">%1$d.%2$dM</string>
+    <string name="remove">Remove</string>
+    <string name="post_text">Post text</string>
+    <string name="edit_post">Edit</string>
+    <string name="edit_post_message">Edit Post</string>
 </resources>

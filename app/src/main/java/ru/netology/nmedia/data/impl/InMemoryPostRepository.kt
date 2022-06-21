@@ -7,6 +7,8 @@ import ru.netology.nmedia.data.PostRepository
 
 class InMemoryPostRepository : PostRepository {
 
+    private var nextId = GENERATED_POSTS_AMOUNT
+
     private val posts
         get() = checkNotNull(data.value) {
             "Data value should not be null"
@@ -16,53 +18,53 @@ class InMemoryPostRepository : PostRepository {
         listOf(
             Post(
                 1,
-                R.drawable.ic_launcher_foreground,
                 "Нетология. Университет интернет-профессий",
                 "13 июня в 18:36",
                 "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов " +
                         "по онлайн-маркетингу",
+                icon = R.drawable.ic_launcher_foreground,
                 (0..10000).random(),
                 (0..5000).random(),
                 (0..20000).random()
             ),
             Post(
                 2,
-                R.drawable.ic_launcher_foreground,
                 "Нетология. Университет интернет-профессий",
                 "13 июня в 18:37",
                 "Затем появились курсы по дизайну, разработке, аналитике и управлению",
+                icon = R.drawable.ic_launcher_foreground,
                 (0..10000).random(),
                 (0..5000).random(),
                 (0..20000).random()
             ),
             Post(
                 3,
-                R.drawable.ic_launcher_foreground,
                 "Нетология. Университет интернет-профессий",
                 "13 июня в 18:38",
                 "Мы растем сами и помогаем расти студентам: от новичков до уверенных профессионалов",
+                icon = R.drawable.ic_launcher_foreground,
                 (0..10000).random(),
                 (0..5000).random(),
                 (0..20000).random()
             ),
             Post(
                 4,
-                R.drawable.ic_launcher_foreground,
                 "Нетология. Университет интернет-профессий",
                 "13 июня в 18:39",
                 "Но самое важное остается с нами: мы верим, что в каждом уже есть сила," +
                         "которая заставляет хотеть больше, целиться выше, бежать быстрее",
+                icon = R.drawable.ic_launcher_foreground,
                 (0..10000).random(),
                 (0..5000).random(),
                 (0..20000).random()
             ),
             Post(
                 5,
-                R.drawable.ic_launcher_foreground,
                 "Нетология. Университет интернет-профессий",
                 "13 июня в 18:40",
                 "Наша миссия - помочь встать на путь роста и начать цепочку перемен - " +
                         "http://netolo.gy/fyb",
+                icon = R.drawable.ic_launcher_foreground,
                 (0..10000).random(),
                 (0..5000).random(),
                 (0..20000).random()
@@ -75,7 +77,8 @@ class InMemoryPostRepository : PostRepository {
             if (it.postId != postId) it
             else {
                 if (it.isLike) it.copy(isLike = !it.isLike, amountLike = it.amountLike - 1)
-                else it.copy(isLike = !it.isLike, amountLike = it.amountLike + 1)}
+                else it.copy(isLike = !it.isLike, amountLike = it.amountLike + 1)
+            }
         }
     }
 
@@ -85,4 +88,28 @@ class InMemoryPostRepository : PostRepository {
             else it.copy(amountShare = it.amountShare + 1)
         }
     }
+
+    override fun deletePost(postId: Int) {
+        data.value = posts.filter { it.postId != postId }
+    }
+
+    override fun save(post: Post) {
+        if (post.postId == PostRepository.NEW_POST_ID) insert(post) else update(post)
+    }
+
+    private fun update(post: Post) {
+        data.value = posts.map {
+            if (it.postId == post.postId) post else it
+        }
+    }
+
+    private fun insert(post: Post) {
+        data.value = listOf(post.copy( postId = ++nextId)) + posts
+    }
+
+    private companion object {
+        const val GENERATED_POSTS_AMOUNT = 1000
+    }
+
+
 }
