@@ -60,6 +60,7 @@ class MainActivity : AppCompatActivity() {
                 editTextPost.text = null
                 editTextPost.clearFocus()
                 editTextPost.hideKeyboard()
+                viewModel.currentPost.value = null
             }
         }
     }
