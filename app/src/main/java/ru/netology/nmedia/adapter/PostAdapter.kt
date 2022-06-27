@@ -51,11 +51,16 @@ internal class PostAdapter(
                             interactionListener.onEditClicked(post)
                             true
                         }
-                        else -> false
+                        else -> {
+                            binding.buttonMenu.isChecked = false
+                            false
+                        }
                     }
                 }
             }
         }
+
+
 
         fun bind(post: Post) {
             this.post = post
@@ -65,14 +70,15 @@ internal class PostAdapter(
                 postIcon.setImageResource(post.icon)
                 postDate.text = post.date
                 postFullText.text = post.message
-                valueLike.text = rounding(post.amountLike)
-                valueShare.text = rounding(post.amountShare)
+                buttonLike.text = rounding(post.amountLike)
+                buttonShare.text = rounding(post.amountShare)
                 valueSee.text = rounding(post.amountView)
-                buttonLike.setImageResource(getLikeIconRes(post.isLike))
                 buttonShare.setOnClickListener { interactionListener.onShareClicked(post) }
                 buttonMenu.setOnClickListener { popupMenu.show() }
+                buttonLike.isChecked = post.isLike
             }
         }
+
 
         private fun getLikeIconRes(isLike: Boolean): Int {
             return if (isLike) R.drawable.ic_like_true else R.drawable.ic_like
@@ -82,14 +88,22 @@ internal class PostAdapter(
             return when (value) {
                 in 0..999 -> "$value"
                 in 1000..1099 -> context.getString(R.string.value_1000_1099, value / 1000)
-                in 1100..9999 -> context.getString(R.string.value_1100_9999, value / 1000, value % 1000 / 100)
+                in 1100..9999 -> context.getString(
+                    R.string.value_1100_9999,
+                    value / 1000,
+                    value % 1000 / 100
+                )
                 in 10000..10999 -> context.getString(R.string.value_10000_10999, value / 10000)
                 in 11000..999999 -> context.getString(
                     R.string.value_11000_99999,
                     value / 10000,
                     value % 10000 / 1000
                 )
-                else -> context.getString(R.string.value_more_1000000, value / 100000, value % 100000 / 10000)
+                else -> context.getString(
+                    R.string.value_more_1000000,
+                    value / 100000,
+                    value % 100000 / 10000
+                )
             }
         }
     }

@@ -38,16 +38,19 @@
         app:layout_constraintStart_toStartOf="@+id/postAuthor"
         app:layout_constraintTop_toBottomOf="@+id/postAuthor" />
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:backgroundTint="#00FFFFFF"
+        android:checkable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_three_dots" />
+        app:icon="@drawable/ic_three_dots"
+        style="@style/Widget.App.Button.IconOnly"
+        app:iconTint="?attr/colorControlNormal"
+        />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier3"
@@ -87,49 +90,28 @@
 
     </androidx.constraintlayout.widget.Barrier>
 
-    <ImageButton
-        android:id="@+id/buttonLike"
+    <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:backgroundTint="#00FFFFFF"
         app:layout_constraintTop_toBottomOf="@+id/postFullText"
-        app:srcCompat="@drawable/ic_like"
-        tools:ignore="TouchTargetSizeCheck"
-        tools:layout_editor_absoluteX="0dp" />
+        android:checkable="true"
+        app:icon="@drawable/ic_like_selector"
+        android:id="@+id/buttonLike"
+        style="@style/Widget.AppTheme.ClickButton"/>
 
-    <TextView
-        android:id="@+id/valueLike"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:text="10"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonLike"
-        app:layout_constraintStart_toEndOf="@+id/buttonLike"
-        app:layout_constraintTop_toTopOf="@+id/buttonLike" />
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonShare"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="#00FFFFFF"
+        android:checkable="true"
         app:layout_constraintBottom_toBottomOf="@+id/buttonLike"
-        app:layout_constraintStart_toEndOf="@+id/valueLike"
+        app:layout_constraintStart_toEndOf="@+id/buttonLike"
         app:layout_constraintTop_toTopOf="@+id/buttonLike"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_baseline_share_24" />
-
-    <TextView
-        android:id="@+id/valueShare"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:text="5"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonShare"
-        app:layout_constraintStart_toEndOf="@+id/buttonShare"
-        app:layout_constraintTop_toTopOf="@+id/buttonShare"
-        app:layout_constraintVertical_bias="0.583" />
+        app:icon="@drawable/ic_baseline_share_24"
+        style="@style/Widget.AppTheme.ClickButton"
+        app:iconTint="?attr/colorControlNormal"/>
 
     <TextView
         android:id="@+id/valueSee"
@@ -138,12 +120,12 @@
         android:gravity="center"
         android:paddingEnd="18dp"
         android:text="5"
-        app:layout_constraintBottom_toBottomOf="@+id/valueShare"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonShare"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/valueShare" />
+        app:layout_constraintTop_toTopOf="@+id/buttonShare" />
 
     <ImageButton
-        android:id="@+id/buttomValueView"
+        android:id="@+id/buttonValueView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#00FFFFFF"
