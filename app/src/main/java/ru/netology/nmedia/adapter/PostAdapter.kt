@@ -1,7 +1,9 @@
 package ru.netology.nmedia.adapter
 
 import android.content.Context
+import android.opengl.Visibility
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
@@ -52,15 +54,12 @@ internal class PostAdapter(
                             true
                         }
                         else -> {
-                            binding.buttonMenu.isChecked = false
                             false
                         }
                     }
                 }
             }
         }
-
-
 
         fun bind(post: Post) {
             this.post = post
@@ -73,16 +72,14 @@ internal class PostAdapter(
                 buttonLike.text = rounding(post.amountLike)
                 buttonShare.text = rounding(post.amountShare)
                 valueSee.text = rounding(post.amountView)
-                buttonShare.setOnClickListener { interactionListener.onShareClicked(post) }
-                buttonMenu.setOnClickListener { popupMenu.show() }
+                if (post.urlVideo != null) videoView.visibility = View.VISIBLE
+                binding.buttonShare.setOnClickListener { interactionListener.onShareClicked(post) }
+                binding.buttonMenu.setOnClickListener { popupMenu.show() }
+                binding.videoPlay.setOnClickListener { interactionListener.onPlayVideoClicked(post) }
                 buttonLike.isChecked = post.isLike
             }
         }
 
-
-        private fun getLikeIconRes(isLike: Boolean): Int {
-            return if (isLike) R.drawable.ic_like_true else R.drawable.ic_like
-        }
 
         private fun rounding(value: Int): String {
             return when (value) {

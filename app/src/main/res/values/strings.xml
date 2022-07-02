@@ -10,4 +10,7 @@
     <string name="post_text">Post text</string>
     <string name="edit_post">Edit</string>
     <string name="edit_post_message">Edit Post</string>
+    <string name="enter_message_hint">Enter a message</string>
+    <string name="name_video">10 questions for a football player</string>
+    <string name="url" translatable="false">URL</string>
 </resources>

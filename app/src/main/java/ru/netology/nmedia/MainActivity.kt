@@ -1,19 +1,21 @@
 package ru.netology.nmedia
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import android.provider.ContactsContract
+import android.util.Log
 import androidx.activity.viewModels
 import ru.netology.nmedia.adapter.PostAdapter
 import ru.netology.nmedia.databinding.ActivityMainBinding
-import ru.netology.nmedia.util.hideKeyboard
-import ru.netology.nmedia.util.showKeyboard
 import ru.netology.nmedia.viewModel.PostViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<PostViewModel>()
     private lateinit var binding: ActivityMainBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,41 +29,43 @@ class MainActivity : AppCompatActivity() {
             adapter.submitList(postsFromData)
         }
 
-        binding.saveButton.setOnClickListener {
-            with(binding) {
-                val content = editTextPost.text.toString()
-                viewModel.onSaveButtonClicked(content)
-                closeEdit.visibility = View.GONE
-                editMessage.text = null
-                editTextPost.clearFocus()
-                editTextPost.hideKeyboard()
-            }
-        }
-        viewModel.currentPost.observe(this) {currentPost ->
-            with(binding) {
-                val content = currentPost?.message
-                editTextPost.setText(content)
-                if (content != null) {
-                    closeEdit.visibility = View.VISIBLE
-                    editMessage.text = content
-                    editTextPost.requestFocus()
-                    editTextPost.showKeyboard()
-                } else {
-                    editTextPost.clearFocus()
-                    editTextPost.hideKeyboard()
-                }
-            }
+        binding.createNewPost.setOnClickListener {
+            viewModel.onAddClicked()
         }
 
-        binding.closeEditMessageButtom.setOnClickListener {
-            with(binding) {
-                closeEdit.visibility = View.GONE
-                editMessage.text = null
-                editTextPost.text = null
-                editTextPost.clearFocus()
-                editTextPost.hideKeyboard()
-                viewModel.currentPost.value = null
+        val postContentActivityLauncher = registerForActivityResult(
+            EditAndCreatePostActivity.EditAndCreatePostResultContract
+            ) { postContent ->
+                postContent ?: return@registerForActivityResult
+            if (postContent.size == 2) viewModel.onSaveButtonClicked(postContent[0], Uri.parse(postContent[1]))
+            else viewModel.onSaveButtonClicked(postContent[0], null)
             }
+
+
+        viewModel.navigateToPostContentScreenEvent.observe(this)
+        {postId ->
+            Log.d("MyLog", "observe = $postId")
+            postContentActivityLauncher.launch(postId)
+        }
+
+        viewModel.sharePostContent.observe(this) {postContent ->
+            val intent = Intent().apply {
+                action = Intent.ACTION_PICK
+                putExtra(Intent.EXTRA_TEXT, postContent)
+                type = ContactsContract.Contacts.CONTENT_TYPE
+            }
+            val shareIntent = Intent.createChooser(intent, getString(android.R.string.search_go))
+            startActivity(shareIntent)
+        }
+
+        viewModel.playVideoContent.observe(this) {urlVideo ->
+            val intent = Intent().apply {
+                action = Intent.ACTION_VIEW
+                data = urlVideo
+            }
+
+            val videoPlayIntent = Intent.createChooser(intent, getString(android.R.string.search_go))
+            startActivity(videoPlayIntent)
         }
     }
 }

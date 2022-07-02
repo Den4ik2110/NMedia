@@ -6,4 +6,6 @@
     <string name="post_text">Текст поста</string>
     <string name="edit_post">Редактировать</string>
     <string name="edit_post_message">Редактируемый пост</string>
+    <string name="enter_message_hint">Введите сообщение</string>
+    <string name="name_video">10 вопросов футболисту</string>
 </resources>

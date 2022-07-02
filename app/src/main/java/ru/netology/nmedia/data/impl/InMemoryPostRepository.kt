@@ -1,13 +1,15 @@
 package ru.netology.nmedia.data.impl
 
+import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.data.Post
 import ru.netology.nmedia.R
 import ru.netology.nmedia.data.PostRepository
 
-class InMemoryPostRepository : PostRepository {
+object InMemoryPostRepository : PostRepository {
 
-    private var nextId = GENERATED_POSTS_AMOUNT
+    private var nextId = 1000
 
     private val posts
         get() = checkNotNull(data.value) {
@@ -35,7 +37,8 @@ class InMemoryPostRepository : PostRepository {
                 icon = R.drawable.ic_launcher_foreground,
                 (0..10000).random(),
                 (0..5000).random(),
-                (0..20000).random()
+                (0..20000).random(),
+                Uri.parse("https://www.youtube.com/watch?v=TbRk4leyWxs")
             ),
             Post(
                 3,
@@ -45,7 +48,8 @@ class InMemoryPostRepository : PostRepository {
                 icon = R.drawable.ic_launcher_foreground,
                 (0..10000).random(),
                 (0..5000).random(),
-                (0..20000).random()
+                (0..20000).random(),
+                Uri.parse("https://www.youtube.com/watch?v=TbRk4leyWxs")
             ),
             Post(
                 4,
@@ -56,7 +60,8 @@ class InMemoryPostRepository : PostRepository {
                 icon = R.drawable.ic_launcher_foreground,
                 (0..10000).random(),
                 (0..5000).random(),
-                (0..20000).random()
+                (0..20000).random(),
+                Uri.parse("https://www.youtube.com/watch?v=TbRk4leyWxs")
             ),
             Post(
                 5,
@@ -89,11 +94,17 @@ class InMemoryPostRepository : PostRepository {
         }
     }
 
+    override fun getPostFromDate(postId: Int?): Post {
+        val currentPost = posts.filter { it.postId == postId }
+        return currentPost[0]
+    }
+
     override fun deletePost(postId: Int) {
         data.value = posts.filter { it.postId != postId }
     }
 
     override fun save(post: Post) {
+        Log.d("MyLog", "postSave = ${post.postId}")
         if (post.postId == PostRepository.NEW_POST_ID) insert(post) else update(post)
     }
 
@@ -104,12 +115,7 @@ class InMemoryPostRepository : PostRepository {
     }
 
     private fun insert(post: Post) {
-        data.value = listOf(post.copy( postId = ++nextId)) + posts
+        data.value = listOf(post.copy(postId = ++nextId)) + posts
     }
-
-    private companion object {
-        const val GENERATED_POSTS_AMOUNT = 1000
-    }
-
 
 }

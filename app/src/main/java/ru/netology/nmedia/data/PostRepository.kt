@@ -14,6 +14,8 @@ interface PostRepository {
 
     fun save(post: Post)
 
+    fun getPostFromDate(postId: Int?): Post
+
     companion object {
         const val NEW_POST_ID = 0
     }

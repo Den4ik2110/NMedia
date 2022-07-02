@@ -10,112 +10,13 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/postsRecycleView"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@id/barrier2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
     </androidx.recyclerview.widget.RecyclerView>
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/black"
-        android:backgroundTint="@color/black"
-        app:barrierDirection="top"
-        app:constraint_referenced_ids="editTextPost,saveButton"
-        tools:layout_editor_absoluteY="5dp" />
-
-    <EditText
-        android:id="@+id/editTextPost"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:backgroundTint="@color/white"
-        android:ems="10"
-        android:foregroundGravity="center_vertical"
-        android:hint="@string/post_text"
-        android:importantForAutofill="no"
-        android:inputType="textMultiLine"
-        android:paddingStart="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/saveButton"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/barrier6" />
-
-    <ImageButton
-        android:id="@+id/saveButton"
-        android:layout_width="52dp"
-        android:layout_height="48dp"
-        android:background="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/barrier6"
-        app:srcCompat="@drawable/ic_ok_post" />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="top"
-        app:constraint_referenced_ids="imageView,edit_message,textView2,close_edit_message_buttom,barrier6"
-        tools:layout_editor_absoluteY="664dp" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="@color/material_dynamic_neutral95"
-        android:backgroundTint="@color/material_dynamic_neutral95"
-        android:padding="10dp"
-        app:layout_constraintBottom_toTopOf="@id/barrier6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_edit_pencil" />
-
-    <TextView
-        android:id="@+id/edit_message"
-        android:layout_width="0dp"
-        android:layout_height="30dp"
-        android:background="@color/material_dynamic_neutral95"
-        android:ellipsize="end"
-        android:gravity="start|center_vertical"
-        android:singleLine="true"
-        android:textColor="@color/material_dynamic_neutral40"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toStartOf="@+id/close_edit_message_buttom"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        tools:text="How are you?" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="0dp"
-        android:layout_height="20dp"
-        android:background="@color/material_dynamic_neutral95"
-        android:text="@string/edit_post_message"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/edit_message"
-        app:layout_constraintEnd_toStartOf="@+id/close_edit_message_buttom"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <ImageButton
-        android:id="@+id/close_edit_message_buttom"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@color/material_dynamic_neutral95"
-        android:backgroundTint="@color/material_dynamic_neutral95"
-        app:layout_constraintBottom_toBottomOf="@+id/edit_message"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editTextPost"
-        app:layout_constraintTop_toTopOf="@+id/textView2"
-        app:srcCompat="@drawable/ic_edit_close" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/close_edit"
@@ -124,7 +25,18 @@
         android:background="@color/material_dynamic_neutral80"
         android:backgroundTint="@color/material_dynamic_neutral80"
         android:visibility="gone"
-        app:constraint_referenced_ids="imageView,edit_message,textView2,close_edit_message_buttom"
         tools:visibility="visible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/create_new_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_new_post"
+        android:elevation="8dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

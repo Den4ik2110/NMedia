@@ -1,5 +1,6 @@
 package ru.netology.nmedia.data
 
+import android.net.Uri
 import ru.netology.nmedia.R
 
 data class Post(
@@ -11,5 +12,6 @@ data class Post(
     var amountLike: Int = 0,
     var amountShare: Int = 0,
     var amountView: Int = 0,
+    var urlVideo: Uri? = null,
     var isLike: Boolean = false
 )

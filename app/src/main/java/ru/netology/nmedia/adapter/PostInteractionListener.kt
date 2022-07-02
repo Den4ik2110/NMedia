@@ -12,4 +12,10 @@ interface PostInteractionListener {
 
     fun onEditClicked(post: Post)
 
+    fun onAddClicked()
+
+    fun getPostFromDate(postId: Int?): Post
+
+    fun onPlayVideoClicked(post: Post)
+
 }
