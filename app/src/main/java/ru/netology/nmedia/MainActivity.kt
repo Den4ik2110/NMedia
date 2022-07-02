@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.sharePostContent.observe(this) {postContent ->
             val intent = Intent().apply {
-                action = Intent.ACTION_PICK
+                action = Intent.ACTION_SEND
                 putExtra(Intent.EXTRA_TEXT, postContent)
                 type = ContactsContract.Contacts.CONTENT_TYPE
             }
