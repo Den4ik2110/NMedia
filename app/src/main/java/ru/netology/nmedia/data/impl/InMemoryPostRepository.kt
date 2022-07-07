@@ -38,7 +38,7 @@ object InMemoryPostRepository : PostRepository {
                 (0..10000).random(),
                 (0..5000).random(),
                 (0..20000).random(),
-                Uri.parse("https://www.youtube.com/watch?v=TbRk4leyWxs")
+                "https://www.youtube.com/watch?v=TbRk4leyWxs"
             ),
             Post(
                 3,
@@ -49,7 +49,7 @@ object InMemoryPostRepository : PostRepository {
                 (0..10000).random(),
                 (0..5000).random(),
                 (0..20000).random(),
-                Uri.parse("https://www.youtube.com/watch?v=TbRk4leyWxs")
+                "https://www.youtube.com/watch?v=TbRk4leyWxs"
             ),
             Post(
                 4,
@@ -61,7 +61,7 @@ object InMemoryPostRepository : PostRepository {
                 (0..10000).random(),
                 (0..5000).random(),
                 (0..20000).random(),
-                Uri.parse("https://www.youtube.com/watch?v=TbRk4leyWxs")
+                "https://www.youtube.com/watch?v=TbRk4leyWxs"
             ),
             Post(
                 5,

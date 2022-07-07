@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/containerPost">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/postIcon"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:constraint_referenced_tags="ite"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_launcher_foreground" />
+
+        <TextView
+            android:id="@+id/postAuthor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:paddingBottom="2dp"
+            android:singleLine="true"
+            android:text="Нетология. Университет интернет-профессий"
+            app:layout_constraintBottom_toBottomOf="@+id/postIcon"
+            app:layout_constraintEnd_toStartOf="@+id/buttonMenu"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/postIcon"
+            app:layout_constraintTop_toTopOf="@+id/postIcon"
+            app:layout_constraintVertical_bias="0.35000002" />
+
+        <TextView
+            android:id="@+id/postDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="2dp"
+            android:text="21 мая в 18:36"
+            app:layout_constraintStart_toStartOf="@+id/postAuthor"
+            app:layout_constraintTop_toBottomOf="@+id/postAuthor" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonMenu"
+            style="@style/Widget.App.Button.IconOnly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:checkable="true"
+            app:icon="@drawable/ic_three_dots"
+            app:iconTint="?attr/colorControlNormal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="visible"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="buttonMenu, postDate, postAuthor, postIcon"
+            tools:layout_editor_absoluteY="108dp">
+
+        </androidx.constraintlayout.widget.Barrier>
+
+        <TextView
+            android:id="@+id/postFullText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:autoLink="web"
+            android:linksClickable="true"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp"
+            android:text="Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растем сами и помагаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остается с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия - помочь встать на путь роста и начать цепочку перемен - http://netolo.gy/fyb"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/barrier3" />
+
+
+        <ImageButton
+            android:id="@+id/video_play"
+            android:layout_width="0dp"
+            android:layout_height="160dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/postFullText"
+            app:srcCompat="@drawable/ic_play_video" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="visible"
+            app:barrierDirection="bottom"
+            app:barrierMargin="4dp"
+            app:constraint_referenced_ids="postFullText,video_play"
+            tools:layout_editor_absoluteY="108dp">
+
+        </androidx.constraintlayout.widget.Barrier>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonLike"
+            style="@style/Widget.AppTheme.ClickButton"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:checkable="true"
+            app:icon="@drawable/ic_like_selector"
+            app:layout_constraintTop_toBottomOf="@id/barrier4" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonShare"
+            style="@style/Widget.AppTheme.ClickButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:checkable="true"
+            app:icon="@drawable/ic_baseline_share_24"
+            app:iconTint="?attr/colorControlNormal"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonLike"
+            app:layout_constraintStart_toEndOf="@+id/buttonLike"
+            app:layout_constraintTop_toTopOf="@+id/buttonLike"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/valueSee"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:paddingEnd="18dp"
+            android:text="5"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonShare"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/buttonShare" />
+
+        <ImageButton
+            android:id="@+id/buttonValueView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#00FFFFFF"
+            app:layout_constraintBottom_toBottomOf="@+id/valueSee"
+            app:layout_constraintEnd_toStartOf="@+id/valueSee"
+            app:layout_constraintTop_toTopOf="@+id/valueSee"
+            app:srcCompat="@drawable/ic_baseline_visibility_24" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/video_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="video_play"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -18,4 +18,8 @@ interface PostInteractionListener {
 
     fun onPlayVideoClicked(post: Post)
 
+    fun onPostClicked(post: Post)
+
+    fun rounding(value: Int): String?
+
 }

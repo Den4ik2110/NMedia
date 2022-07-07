@@ -2,7 +2,6 @@ package ru.netology.nmedia.data.impl
 
 import android.app.Application
 import android.content.Context
-import android.util.Log
 import androidx.core.content.edit
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
@@ -92,4 +91,10 @@ class GsonPostRepository(private val application: Application) : PostRepository 
         posts = listOf(post.copy(postId = ++nextId)) + posts
     }
 
+    companion object {
+        private var instance: GsonPostRepository? = null
+        fun getInstance(application: Application) = instance ?: GsonPostRepository(application).also {
+            instance = it
+        }
+    }
 }

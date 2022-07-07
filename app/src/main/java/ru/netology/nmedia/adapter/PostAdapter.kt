@@ -1,7 +1,6 @@
 package ru.netology.nmedia.adapter
 
 import android.content.Context
-import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,6 @@ import ru.netology.nmedia.databinding.OnePostBinding
 
 internal class PostAdapter(
     private val interactionListener: PostInteractionListener,
-    private val context: Context
 ) : ListAdapter<Post, PostAdapter.ViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -38,6 +36,10 @@ internal class PostAdapter(
             binding.buttonLike.setOnClickListener {
                 interactionListener.onLikeClicked(post)
             }
+            binding.videoPlay.setOnClickListener { interactionListener.onPlayVideoClicked(post) }
+            binding.buttonShare.setOnClickListener { interactionListener.onShareClicked(post) }
+            binding.buttonMenu.setOnClickListener { popupMenu.show() }
+            binding.postFullText.setOnClickListener {interactionListener.onPostClicked(post)}
         }
 
         private val popupMenu by lazy {
@@ -69,40 +71,14 @@ internal class PostAdapter(
                 postIcon.setImageResource(post.icon)
                 postDate.text = post.date
                 postFullText.text = post.message
-                buttonLike.text = rounding(post.amountLike)
-                buttonShare.text = rounding(post.amountShare)
-                valueSee.text = rounding(post.amountView)
+                buttonLike.text = interactionListener.rounding(post.amountLike)
+                buttonShare.text = interactionListener.rounding(post.amountShare)
+                valueSee.text = interactionListener.rounding(post.amountView)
                 if (post.urlVideo != null) videoView.visibility = View.VISIBLE
-                binding.buttonShare.setOnClickListener { interactionListener.onShareClicked(post) }
-                binding.buttonMenu.setOnClickListener { popupMenu.show() }
-                binding.videoPlay.setOnClickListener { interactionListener.onPlayVideoClicked(post) }
                 buttonLike.isChecked = post.isLike
             }
         }
 
-
-        private fun rounding(value: Int): String {
-            return when (value) {
-                in 0..999 -> "$value"
-                in 1000..1099 -> context.getString(R.string.value_1000_1099, value / 1000)
-                in 1100..9999 -> context.getString(
-                    R.string.value_1100_9999,
-                    value / 1000,
-                    value % 1000 / 100
-                )
-                in 10000..10999 -> context.getString(R.string.value_10000_10999, value / 10000)
-                in 11000..999999 -> context.getString(
-                    R.string.value_11000_99999,
-                    value / 10000,
-                    value % 10000 / 1000
-                )
-                else -> context.getString(
-                    R.string.value_more_1000000,
-                    value / 100000,
-                    value % 100000 / 10000
-                )
-            }
-        }
     }
 
     private object DiffCallback : DiffUtil.ItemCallback<Post>() {
