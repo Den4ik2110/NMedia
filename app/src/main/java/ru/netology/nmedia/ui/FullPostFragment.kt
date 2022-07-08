@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import ru.netology.nmedia.R
@@ -17,7 +17,7 @@ import ru.netology.nmedia.viewModel.PostViewModel
 
 class FullPostFragment : Fragment() {
 
-    private val viewModel by viewModels<PostViewModel>()
+    private val viewModel by activityViewModels<PostViewModel>()
 
     private val postId by lazy {
         val args by navArgs<FullPostFragmentArgs>()
